@@ -14,7 +14,7 @@ app.get('/', function(request, response) {
 
 	var readStream = fileSystem.createReadStream(filePath);
 	readStream.pipe(response);
-	console.log(data);
+	//console.log(data);
 });
 
 var port = process.env.PORT || 5000;
