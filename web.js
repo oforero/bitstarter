@@ -4,11 +4,17 @@ var fs = require('fs');
 var app = express.createServer(express.logger());
 
 app.get('/', function(request, response) {
-	fs.readFile('index.html', function (err, data) {
-		if (err) throw err;
-		response.send(data.toString);
-		console.log(data);
-	});
+	var filePath = path.join(__dirname, 'index.html');
+    var stat = fileSystem.statSync(filePath);
+	
+	response.writeHead(200, {
+        'Content-Type': 'text/text',
+        'Content-Length': stat.size
+    });
+
+	var readStream = fileSystem.createReadStream(filePath);
+	readStream.pipe(response);
+	console.log(data);
 });
 
 var port = process.env.PORT || 5000;
