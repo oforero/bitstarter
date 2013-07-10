@@ -6,14 +6,14 @@ var app = express.createServer(express.logger());
 
 app.get('/', function(request, response) {
 	var filePath = path.join(__dirname, 'index.html');
-    var stat = fileSystem.statSync(filePath);
+    var stat = fs.statSync(filePath);
 	
 	response.writeHead(200, {
         'Content-Type': 'text/text',
         'Content-Length': stat.size
     });
 
-	var readStream = fileSystem.createReadStream(filePath);
+	var readStream = fs.createReadStream(filePath);
 	readStream.pipe(response);
 	//console.log(data);
 });
